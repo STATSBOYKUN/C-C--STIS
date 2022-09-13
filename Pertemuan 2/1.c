@@ -1,10 +1,14 @@
 #include<stdio.h>
 
 int main(){
-   //size of data
-   printf("Size of char: %d byte(s)", sizeof(char));
-   printf("Size of int: %d byte(s)", sizeof(int));
-   printf("Size of float: %d byte(s)", sizeof(float));
-   printf("Size of double: %d byte(s)", sizeof(double));
+   //ukuran - ukuran data
+   printf("[PROGRAM SIZE OF DATA]");
+
+   printf("\n");
+   printf("Ukuran data char \t: %d byte\n", sizeof(char));
+   printf("Ukuran data int \t: %d byte\n", sizeof(int));
+   printf("Ukuran data float \t: %d byte\n", sizeof(float));
+   printf("Ukuran data double \t: %d byte\n", sizeof(double));
+
    return 0;
 }
