@@ -8,45 +8,52 @@
 //calculator
 
 struct calculator{
-   float *a;
-   float *b;
+   float a;
+   float b;
    float *hasil;
 };
 
-struct calculator *kalkulatorSederhana;
+struct calculator kalkulatorSederhana;
 int main(){
    char operator, opsi;
    bool ulang = true;
+   float temp;
 
    while(ulang == TRUE){
       CLEAR;
-      printf("Kalkulator Sederhana\n");
-      printf("Masukkan angka pertama : ");
-      scanf("%.2f", &kalkulatorSederhana->a);
-      printf("Masukkan angka kedua : ");
-      scanf("%.2f", &kalkulatorSederhana->b);
+      printf("[KALKULATOR SEDERHANA]\n");
+      printf("======================\n");
+      printf("Masukkan angka pertama \t: ");
+      scanf("%f", &kalkulatorSederhana.a);
+      printf("Masukkan angka kedua \t: ");
+      scanf("%f", &kalkulatorSederhana.b);
       printf("Masukkan operator (+, -, *, /) : ");
       scanf("%s", &operator);
 
       switch(operator){
          case '+':
-            *kalkulatorSederhana->hasil = kalkulatorSederhana->a + kalkulatorSederhana->b;
+            temp = kalkulatorSederhana.a + kalkulatorSederhana.b;
+            kalkulatorSederhana.hasil = &temp;
             break;
          case '-':
-            kalkulatorSederhana->hasil = kalkulatorSederhana->a - kalkulatorSederhana->b;
+            temp = kalkulatorSederhana.a - kalkulatorSederhana.b;
+            kalkulatorSederhana.hasil = &temp;
             break;
          case '*':
-            kalkulatorSederhana->hasil = kalkulatorSederhana->a * kalkulatorSederhana->b;
+            temp = kalkulatorSederhana.a * kalkulatorSederhana.b;
+            kalkulatorSederhana.hasil = &temp;
             break;
          case '/':
-            kalkulatorSederhana->hasil = kalkulatorSederhana->a / kalkulatorSederhana->b;
+            temp = kalkulatorSederhana.a / kalkulatorSederhana.b;
+            kalkulatorSederhana.hasil = &temp;
             break;
          default:
             printf("Operator tidak ditemukan");
             break;
       }
 
-      printf("Hasil : %.2f", kalkulatorSederhana->hasil);
+      printf("======================\n");
+      printf("Hasil : %.2f\n\n", *kalkulatorSederhana.hasil);
       printf("Apakah anda ingin mengulang? (y/n) : ");
       scanf("%s", &opsi);
       if(opsi == 'y'){
@@ -58,3 +65,10 @@ int main(){
 
    return 0;
 }
+
+/*
+Dibuat oleh :
+  Nama    : Umar Hadi Pranoto
+  NIM     : 222112404
+  Sekolah : Politeknik Statistika STIS
+*/

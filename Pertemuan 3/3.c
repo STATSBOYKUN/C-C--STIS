@@ -1,25 +1,26 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
+#include<time.h>
 
 #define CLEAR system("cls")
 //tebak angka
 
-struct tebakan{
+struct tebak2an{
    int angka;
    int tebakan;
 };
 
-struct tebakan *tebakAngka;
-
 int main(){
    CLEAR;
+   struct tebak2an *tebakAngka = (struct tebak2an*)malloc(sizeof(struct tebak2an));
    int i = 0;
-   tebakAngka->angka = 17;
+   
+   tebakAngka->angka = 1 + rand() % 1000;
 
    do{
       CLEAR;
-      printf("Tebak angka : ");
+      printf("Tebak angka(1-1000) : ");
       scanf("%d", &tebakAngka->tebakan);
 
       if(tebakAngka->tebakan < tebakAngka->angka){
@@ -29,6 +30,7 @@ int main(){
       }else{
          printf("Selamat anda berhasil menebak angka\n");
       }
+      getch();
       i++;
    }while(tebakAngka->tebakan != tebakAngka->angka);
 
@@ -36,3 +38,10 @@ int main(){
 
    return 0;
 }
+
+/*
+Dibuat oleh :
+  Nama    : Umar Hadi Pranoto
+  NIM     : 222112404
+  Sekolah : Politeknik Statistika STIS
+*/
