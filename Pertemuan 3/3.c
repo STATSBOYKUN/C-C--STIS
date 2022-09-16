@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include<conio.h>
 
 #define CLEAR system("cls")
@@ -16,7 +17,7 @@ int main(){
    int i = 0;
    tebakAngka->angka = 17;
 
-   while(tebakAngka->tebakan != tebakAngka->angka){
+   do{
       CLEAR;
       printf("Tebak angka : ");
       scanf("%d", &tebakAngka->tebakan);
@@ -29,9 +30,9 @@ int main(){
          printf("Selamat anda berhasil menebak angka\n");
       }
       i++;
-   }
+   }while(tebakAngka->tebakan != tebakAngka->angka);
 
    printf("Anda telah menebak angka dalam %d kali", i);
-   getch();
+
    return 0;
 }
