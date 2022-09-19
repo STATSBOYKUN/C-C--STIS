@@ -9,14 +9,15 @@
 //program CRUD mahasiswa
 
 struct mahasiswa{
-   char nim[10];
-   char nama[50];
-   char kelas[50];
-   char jurusan[50];
-   char no_wa[50];
+   char nim[15];
+   char nama[40];
+   char kelas[10];
+   char jurusan[30];
+   char no_wa[20];
 };
 
 struct mahasiswa mhs[10];
+char temp;
 
 void tambah(){
    CLEAR;
@@ -32,11 +33,13 @@ void tambah(){
       printf("Masukkan NIM \t: ");
       scanf("%s", &mhs[j].nim);
       printf("Masukkan Nama \t: ");
-      scanf("%s", &mhs[j].nama);
+      scanf("%c", &temp);
+      scanf("%[^\n]", &mhs[j].nama);
       printf("Masukkan Kelas \t: ");
       scanf("%s", &mhs[j].kelas);
-      printf("Masukkan Jurusan \t: ");
-      scanf("%s", &mhs[j].jurusan);
+      printf("Masukkan Jurusan \t: "); 
+      scanf("%c", &temp);
+      scanf("%[^\n]", &mhs[j].jurusan);
       printf("Masukkan No. WA \t: ");
       scanf("%s", &mhs[j].no_wa);
       getch();
@@ -53,11 +56,11 @@ void tampil(){
       CLEAR;
       printf("[Data ke-%d]\n", j+1);
 
-      printf("NIM \t: %s \n", mhs[j].nim);
-      printf("Nama \t: %s \n", mhs[j].nama);
-      printf("Kelas \t: %s \n", mhs[j].kelas);
+      printf("NIM \t\t: %s \n", mhs[j].nim);
+      printf("Nama \t\t: %s \n", mhs[j].nama);
+      printf("Kelas \t\t: %s \n", mhs[j].kelas);
       printf("Jurusan \t: %s \n", mhs[j].jurusan);
-      printf("No. WA \t: %s \n", mhs[j].no_wa);
+      printf("No. WA \t\t: %s \n", mhs[j].no_wa);
       getch();
    }
 }
@@ -73,11 +76,13 @@ void ubah(){
    for(int k=0; k<10; k++){
       if(strcmp(nim, mhs[k].nim) == 0){
          printf("Masukkan Nama \t: ");
-         scanf("%s", &mhs[k].nama);
+         scanf("%c", &temp);
+         scanf("%[^\n]", &mhs[k].nama);
          printf("Masukkan Kelas \t: ");
          scanf("%s", &mhs[k].kelas);
          printf("Masukkan Jurusan \t: ");
-         scanf("%s", &mhs[k].jurusan);
+         scanf("%c", &temp);
+         scanf("%[^\n]", &mhs[k].jurusan); 
          printf("Masukkan No. WA \t: ");
          scanf("%s", &mhs[k].no_wa);
          ketemu = TRUE;
