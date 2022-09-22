@@ -48,17 +48,24 @@ void printList(struct Node* node) {
 
 }
  
-// Driver code
 int main() {
    struct Node* head = NULL;
+   int n;
 
-   push(&head, 7);
-   push(&head, 1);
- 
-   printf("Created DLL is: ");
+   printf("Linked List\n");
+   printf("Banyak data : "); scanf("%d", &n);
+
+   for(int i=0; i<n; i++){
+      int data;
+      printf("Data ke-%d : ", i+1); scanf("%d", &data);
+      push(&head, data);
+   }
+
+   printf("List sebelum di reverse : ");
    printList(head);
 
    reverse(&head);
+   printf("\nList setelah di reverse : \n");
    printList(head);
  
    getchar();

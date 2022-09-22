@@ -13,12 +13,17 @@ void insertFirst(int data);
 void printList();
 
 int main(){
-   insertFirst(10);
-   insertFirst(20);
-   insertFirst(30);
-   insertFirst(1);
-   insertFirst(40);
-   insertFirst(56);
+   int n;
+
+   printf("Linked List\n");
+   printf("Banyak data : "); scanf("%d", &n);
+
+   for(int i=0; i<n; i++){
+      int data;
+      printf("Data ke-%d : ", i+1); scanf("%d", &data);
+      insertFirst(data);
+   }
+   
    printList();
 }
 

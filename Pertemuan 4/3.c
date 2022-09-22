@@ -1,67 +1,54 @@
-#include <stdio.h>
-#include <stdlib.h>
- 
-// A linked list node
-struct Node {
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+//linked list
+
+struct node{
    int nim;
    char nama[50];
-   struct Node* next;
-   struct Node* prev;
+   struct node *next;
 };
- 
-void push(struct Node** head_ref, int new_data) {
-   struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-   new_node->data = new_data;
-   new_node->next = (*head_ref);
-   new_node->prev = NULL;
 
-   if ((*head_ref) != NULL){
-      (*head_ref)->prev = new_node;
+struct node *head = NULL;
+
+void insertFirst(int data, char nama[]);
+void printList();
+
+int main(){
+   int n, nim;
+   char nama[50];
+
+   printf("Linked List\n");
+   printf("Banyak data : "); scanf("%d", &n);
+
+   for(int i=0; i<n; i++){
+      int data;
+      printf("Data ke-%d : ", i+1);
+      printf("NIM : "); scanf("%d", &nim);
+      printf("Nama : "); scanf("%s", &nama);
+
+      insertFirst(nim, nama);
    }
-
-   (*head_ref) = new_node;
+   
+   printList();
 }
 
-void reverse(struct Node** head_ref) {
-   struct Node* temp = NULL;
-   struct Node* current = *head_ref;
-
-   while (current != NULL) {
-      temp = current->prev;
-      current->prev = current->next;
-      current->next = temp;
-      current = current->prev;
-   }
-
-   if (temp != NULL) {
-      *head_ref = temp->prev;
-   }
+void insertFirst(int data, char nama[]){
+   struct node *temp = (struct node*) malloc(sizeof(struct node));
+   temp->nim = data;
+   strcpy(temp->nama, nama);
+   
+   temp->next = head;
+   head = temp;
 }
 
-void printList(struct Node* node) {
-   struct Node* last;
-   printf("\nIsi list :  \n");
-   while (node != NULL) {
-      printf(" %d ", node->data);
-      last = node;
-      node = node->next;
+void printList(){
+   struct node *ptr = head;
+
+   printf("Isi list: ");
+   while(ptr != NULL){
+      printf("NIM : %d ",ptr->nim);
+      printf("Nama : %s ",ptr->nama);
+      ptr = ptr->next;
    }
-
-}
- 
-// Driver code
-int main() {
-   struct Node* head = NULL;
-
-   push(&head, 7);
-   push(&head, 1);
- 
-   printf("Created DLL is: ");
-   printList(head);
-
-   reverse(&head);
-   printList(head);
- 
-   getchar();
-   return 0;
 }
