@@ -1,73 +1,103 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
  
-// A linked list node
-struct Node {
-   int data;
-   struct Node* next;
-   struct Node* prev;
+struct node{
+   int value;
+   struct node *next;
+   struct node *prev;
 };
  
-void push(struct Node** head_ref, int new_data) {
-   struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-   new_node->data = new_data;
-   new_node->next = (*head_ref);
-   new_node->prev = NULL;
-
-   if ((*head_ref) != NULL){
-      (*head_ref)->prev = new_node;
-   }
-
-   (*head_ref) = new_node;
-}
-
-void reverse(struct Node** head_ref) {
-   struct Node* temp = NULL;
-   struct Node* current = *head_ref;
-
-   while (current != NULL) {
-      temp = current->prev;
-      current->prev = current->next;
-      current->next = temp;
-      current = current->prev;
-   }
-
-   if (temp != NULL) {
-      *head_ref = temp->prev;
-   }
-}
-
-void printList(struct Node* node) {
-   struct Node* last;
-   printf("\nIsi list :  \n");
-   while (node != NULL) {
-      printf(" %d ", node->data);
-      last = node;
-      node = node->next;
-   }
-
-}
+typedef struct node *ptrnode;
  
-int main() {
-   struct Node* head = NULL;
-   int n;
+ptrnode createNode(int nilai);
+void append(ptrnode head, int nilai);
+void reverse(ptrnode *head);
+void printList(ptrnode temp);
+ 
+int main(){
+   int n, temp;
+   ptrnode head = NULL;
+    
+   head = (ptrnode)malloc(sizeof(struct node));
 
-   printf("Linked List\n");
+   printf("[PROGRAM LINKED LIST]\n");
    printf("Banyak data : "); scanf("%d", &n);
+   for(int i = 0;i < n;i++){
+      printf("Input data ke - %d : ", i+1);
+      if (i == 0){
+         scanf("%d", &temp);
+         head = createNode(temp);
+      }else{
+         scanf("%d", &temp);
+         append(head, temp);
+      }
+   }
+   
+   printf("\n");
 
-   for(int i=0; i<n; i++){
-      int data;
-      printf("Data ke-%d : ", i+1); scanf("%d", &data);
-      push(&head, data);
+   printf("Data sebelum di reverse : \n");
+   printList(head);
+   reverse(&head);
+   
+   printf("\n\n");
+   printf("Data setelah di reverse : \n");
+   printList(head);
+
+   free(head);
+}
+ 
+ptrnode createNode(int nilai){
+   ptrnode p;
+   p = (ptrnode)malloc(sizeof(struct node));
+   p->value = nilai;
+   p->next = NULL;
+   p->prev = NULL;
+    
+   return(p);
+}
+ 
+void append(ptrnode head, int nilai){
+   ptrnode tail = head;
+    
+   while(tail->next != NULL){
+      tail = tail->next;
+   }
+    
+   ptrnode new_node = createNode(nilai);
+   tail->next = new_node;
+}
+ 
+void reverse(ptrnode *head){
+   int i = 0;
+   int temp_value[100];
+   ptrnode temp = *head;
+    
+   while (temp != NULL){
+      temp_value[i] = temp->value;
+      temp = temp->next;
+      i++;
+   }
+    
+   if (temp != NULL){
+      *head = temp->prev;
+   }
+   temp = *head;
+    
+   while (temp != NULL){
+      temp->value = temp_value[i-1];
+      temp = temp->next;
+      i--;
+   }
+}
+ 
+void printList(ptrnode temp){
+   int count = 0;
+   while(temp != NULL){
+      printf("Nilai data ke-%d : %d",count + 1, temp->value);
+      printf("; Alamat : %d\n", &temp->value);
+      temp = temp->next;
+      count++;
    }
 
-   printf("List sebelum di reverse : ");
-   printList(head);
-
-   reverse(&head);
-   printf("\nList setelah di reverse : \n");
-   printList(head);
- 
-   getchar();
-   return 0;
+   printf("Panjang linked list : %d", count);
 }

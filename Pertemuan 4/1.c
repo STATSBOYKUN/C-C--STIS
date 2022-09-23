@@ -1,48 +1,73 @@
 #include<stdio.h>
 #include<stdlib.h>
-//linked list
-
+ 
 struct node{
-   int data;
+   int value;
    struct node *next;
+   struct node *prev;
 };
-
-struct node *head = NULL;
-
-void insertFirst(int data);
-void printList();
-
+ 
+typedef struct node *ptrnode;
+ 
+ptrnode createNode(int nilai);
+void append(ptrnode head, int nilai);
+void printList(ptrnode temp);
+ 
 int main(){
-   int n;
+   int n, temp;
+   ptrnode head = NULL;
+    
+   head = (ptrnode)malloc(sizeof(struct node));
 
-   printf("Linked List\n");
+   printf("[PROGRAM LINKED LIST]\n");
    printf("Banyak data : "); scanf("%d", &n);
+   for(int i = 0;i < n;i++){
+      printf("Input data ke - %d : ", i+1);
+      if (i == 0){
+         scanf("%d", &temp);
+         head = createNode(temp);
+      }else{
+         scanf("%d", &temp);
+         append(head, temp);
+      }
+   }    
+   printf("\n");
+   printf("Data linked list : \n");
+   printList(head);
 
-   for(int i=0; i<n; i++){
-      int data;
-      printf("Data ke-%d : ", i+1); scanf("%d", &data);
-      insertFirst(data);
+   free(head);
+}
+ 
+ptrnode createNode(int nilai){
+   ptrnode p;
+   p = (ptrnode)malloc(sizeof(struct node));
+   p->value = nilai;
+   p->next = NULL;
+   p->prev = NULL;
+    
+   return(p);
+}
+ 
+void append(ptrnode head, int nilai){
+   ptrnode tail = head;
+    
+   while(tail->next != NULL){
+      tail = tail->next;
    }
+    
+   ptrnode new_node = createNode(nilai);
+   tail->next = new_node;
    
-   printList();
 }
-
-void insertFirst(int data){
-   struct node *temp = (struct node*) malloc(sizeof(struct node));
-   temp->data = data;
-   temp->next = head;
-   head = temp;
-}
-
-void printList(){
+ 
+void printList(ptrnode temp){
    int count = 0;
-   struct node *ptr = head;
-   printf("Isi list: ");
-   while(ptr != NULL){
-      printf("%d ",ptr->data);
-      ptr = ptr->next;
+   while(temp != NULL){
+      printf("Nilai data ke-%d : %d",count + 1, temp->value);
+      printf("; Alamat : %d\n", &temp->value);
+      temp = temp->next;
       count++;
    }
 
-   printf("Panjang list: %d", count);
+   printf("Panjang linked list : %d", count);
 }
