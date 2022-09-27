@@ -70,12 +70,14 @@ ptrnode insert_head(ptrnode head, int nilai){
 }
 
 ptrnode insert_tail(ptrnode head, int nilai){
-   ptrnode tail = head;
-   while(tail->next != NULL)
-   tail = tail->next;
-
    ptrnode new_node = createNode(nilai);
+
+   while(tail->next != NULL){
+      tail = tail->next;
+   }
    tail->next = new_node;
+   new_node->prev = tail;
+   tail = new_node;   
 
    return(head);
 }
@@ -133,14 +135,14 @@ ptrnode remove_last(ptrnode head){
       return(0);
    }
 
-   ptrnode tail = head;
-   while(tail->next != NULL){
-      tail = tail->next;
+   ptrnode last = head;
+   while(last->next != NULL){
+      last = last->next;
    }
 
-   tail->prev = NULL;
-   tail->prev->next = NULL;
-   free(tail);
+   last->prev = NULL;
+   last->next = NULL;
+   free(last);
    return(head);
 }
 
