@@ -4,7 +4,6 @@
 struct node{
    int value;
    struct node *next;
-   struct node *prev;
 };
  
 typedef struct node *ptrnode;
@@ -51,7 +50,6 @@ ptrnode createNode(int nilai){
    p = (ptrnode)malloc(sizeof(struct node));
    p->value = nilai;
    p->next = NULL;
-   p->prev = NULL;
     
    return(p);
 }
@@ -77,10 +75,7 @@ void reverse(ptrnode *head){
       temp = temp->next;
       i++;
    }
-    
-   if (temp != NULL){
-      *head = temp->prev;
-   }
+   
    temp = *head;
     
    while (temp != NULL){

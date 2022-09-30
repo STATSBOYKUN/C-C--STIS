@@ -6,7 +6,6 @@ struct mahasiswa{
    int nim;
    char nama[50];
    struct mahasiswa *next;
-   struct mahasiswa *prev;
 };
  
 typedef struct mahasiswa *mhs;
@@ -52,7 +51,6 @@ mhs createNode(int nilai, char nama[]){
    strcpy(temp->nama, nama);
 
    temp->next = NULL;
-   temp->prev = NULL;
     
    return(temp);
 }

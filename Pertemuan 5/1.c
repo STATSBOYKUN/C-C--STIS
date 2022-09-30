@@ -8,23 +8,25 @@ struct node{
 };
  
 typedef struct node *ptrnode;
+ptrnode head, tail;
  
 ptrnode createNode(int nilai);
-ptrnode insert_head(ptrnode head, int nilai);
-ptrnode insert_tail(ptrnode head, int nilai);
-ptrnode insert_after(ptrnode head, int nilai, int nilai_dicari);
-ptrnode insert_before(ptrnode head, int nilai, int nilai_dicari);
-ptrnode remove_first(ptrnode head);
-ptrnode remove_last(ptrnode head);
-ptrnode remove_middle(ptrnode head, int nilai);
+void insert_head(int nilai);
+void insert_tail(int nilai);
+void insert_after(int nilai, int nilai_dicari);
+void insert_before(int nilai, int nilai_dicari);
+void remove_first();
+void remove_last();
+void remove_middle(int nilai);
 void printList(ptrnode temp);
  
 int main(){
    int n, temp;
-   ptrnode head = NULL;
-   ptrnode tail = NULL;
+   head = NULL;
+   tail = NULL;
     
    head = (ptrnode)malloc(sizeof(struct node));
+   tail = (ptrnode)malloc(sizeof(struct node));
     
    tail = head;
    printf("Banyak data : "); scanf("%d", &n);
@@ -35,54 +37,53 @@ int main(){
          head = createNode(temp);
       }else{
          scanf("%d", &temp);
-         head = insert_tail(head, temp);
+         insert_tail(temp);
       }
    }
+   
+   printf("\n");
+   printf("List sebelum remove_last: \n");
+   printList(head);
 
-   head = insert_after(head, 60, 50);
-   head = insert_before(head, 35, 40);
-   head = remove_first(head);
-   head = remove_last(head);
-   head = remove_middle(head, 30);
+   remove_last();
 
    printf("\n");
-   printf("List : \n");
+   printf("List setelah remove_last: \n");
    printList(head);
 }
  
 ptrnode createNode(int nilai){
-   ptrnode p;
-   p = (ptrnode)malloc(sizeof(struct node));
-   p->value = nilai;
-   p->next = NULL;
-   p->prev = NULL;
+   ptrnode temp;
+   temp = (ptrnode)malloc(sizeof(struct node));
+   temp->value = nilai;
+   temp->next = NULL;
+   temp->prev = NULL;
     
-   return(p);
+   return(temp);
 }
-ptrnode insert_head(ptrnode head, int nilai){
+
+void insert_head(int nilai){
    ptrnode new_node = createNode(nilai);
 
    new_node->next = head;
    head->prev = new_node;
    head = new_node;
-    
-   return(head);
 }
 
-ptrnode insert_tail(ptrnode head, int nilai){
+void insert_tail(int nilai){
    ptrnode new_node = createNode(nilai);
 
+   tail = head;
    while(tail->next != NULL){
       tail = tail->next;
    }
+
    tail->next = new_node;
    new_node->prev = tail;
-   tail = new_node;   
-
-   return(head);
+   tail = new_node;  
 }
 
-ptrnode insert_after(ptrnode head, int nilai, int nilai_dicari){
+void insert_after(int nilai, int nilai_dicari){
    ptrnode cursor = head;
    while(cursor->value != nilai_dicari){
       cursor = cursor->next; 
@@ -93,13 +94,11 @@ ptrnode insert_after(ptrnode head, int nilai, int nilai_dicari){
    cursor->next->prev = new_node;
    new_node->prev = cursor;
    cursor->next = new_node;
-
-   return(head);
 }
 
-ptrnode insert_before(ptrnode head, int nilai, int nilai_dicari){ 
+void insert_before(int nilai, int nilai_dicari){ 
    if (head->value == nilai_dicari){
-      head = insert_head(head, nilai);
+      insert_head(nilai);
    }else{
       ptrnode cursor = head;
       while(cursor->value != nilai_dicari){
@@ -112,10 +111,9 @@ ptrnode insert_before(ptrnode head, int nilai, int nilai_dicari){
       new_node->next = cursor;
       cursor->prev = new_node;   
    }
-   return(head);
 }
 
-ptrnode remove_first(ptrnode head){
+void remove_first(){
    if(head == NULL){
       return(0);
    }
@@ -127,26 +125,23 @@ ptrnode remove_first(ptrnode head){
 
    free(first);
 
-   return(head);
 }
 
-ptrnode remove_last(ptrnode head){
+void remove_last(){
    if(head == NULL){
       return(0);
    }
 
-   ptrnode last = head;
-   while(last->next != NULL){
-      last = last->next;
-   }
-
+   ptrnode last = tail;
+   tail = tail->prev;
+   tail->next = NULL;
    last->prev = NULL;
-   last->next = NULL;
+
    free(last);
-   return(head);
+
 }
 
-ptrnode remove_middle(ptrnode head, int nilai){
+void remove_middle(int nilai){
    ptrnode cursor = head;
    while(cursor != NULL){
       if(cursor->next->value == nilai){
@@ -163,9 +158,8 @@ ptrnode remove_middle(ptrnode head, int nilai){
       tmp->prev = NULL;
       free(tmp);
    }
-
-   return(head);
 }
+
 void printList(ptrnode temp){
    while(temp != NULL){
       printf("Nilai : %d ;",temp->value);
