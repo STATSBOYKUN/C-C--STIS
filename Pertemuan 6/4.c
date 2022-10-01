@@ -98,21 +98,33 @@ void decimalToOctal(int n){
 }
 
 int main() {
-   int n;
+   int n, pilihan;
    int ulang = 1;
 
    while (ulang == 1) {
       CLEAR;
       printf("[PROGRAM KONVERSI DESIMAL KE BINER]\n");
       printf("==================================\n");
+      printf(" 1. Desimal ke Biner\n");
+      printf(" 2. Desimal ke Oktal\n");
+      printf("==================================\n");
+      printf(" Pilih : "); scanf("%d", &pilihan);
 
-      printf(" Desimal \t: ");
-      scanf("%d", &n);
-      decimalToBinary(n);
+      if (pilihan == 1 || pilihan == 2) {
+         printf(" Desimal \t: ");
+         scanf("%d", &n);
+      }
 
-      printf("\n");
-      decimalToOctal(n);
-
+      switch(pilihan){
+         case 1:
+            decimalToBinary(n);
+            break;
+         case 2:
+            decimalToOctal(n);
+            break;
+         default:
+            printf("Pilihan tidak tersedia");
+      }
       printf("\n\n");
       printf("Ulangi program? (YA = 1, TIDAK = 0) : "); scanf("%d", &ulang);
    }
