@@ -28,6 +28,7 @@ void dequeue(mhs** head) {
       mhs* temp = *head;
       (*head) = (*head)->next;
       free(temp);
+      count--;
    }
 }
 
@@ -35,28 +36,28 @@ void dequeue(mhs** head) {
 void enqueue(mhs** head,char n[], int alp, int kal) {
    mhs* temp = newmhs(n,alp,kal);
 
-   if ((*head)==NULL) {  
-      (*head)=temp;
+   if ((*head) == NULL) {  
+      (*head) = temp;
    }else if ((*head)->alpro > alp) {
       temp->next = *head;
       (*head) = temp;
-   } else if ((*head)->alpro==alp) { 
-      
-      mhs*start=(*head);
-      while (start->next != NULL && start->next->kalkulus < kal) {
+   } else if ((*head)->alpro == alp) { 
+      mhs *start = (*head);
+
+      while ((start != NULL) && (start->next->kalkulus < kal)) {
          start = start->next;
       }
       temp->next = start->next;
       start->next = temp;
    } else {
 
-      mhs*start=(*head);
-      while (start->next != NULL && start->next->alpro < alp) {
+      mhs *start=(*head);
+      while ((start != NULL) && (start->next->alpro < alp)) {
          start = start->next;
       }
       
-      if (start->next->alpro==alp){
-         while (start->next != NULL && start->next->kalkulus <kal) {
+      if (start->next->alpro == alp){
+         while ((start != NULL) && (start->next->kalkulus <kal)) {
             start = start->next;
          }
       }
@@ -69,15 +70,18 @@ void enqueue(mhs** head,char n[], int alp, int kal) {
 }
 
 void display(mhs* head) {
+   int noPendaftar = 1;
    if(head == NULL) {
       printf("Belum ada yang daftar\n");
    }else{
-      while (head->next != NULL) {
+      while (count != 0) {
+         printf("[ PENDAFTAR KE-%d ]\n", noPendaftar);
+         printf("Nama\t\t:%s \nAlpro\t\t: %d \nKalkulus\t: %d\n", head->nama,head->alpro,head->kalkulus);
          head = head->next;
+         count--;
+         noPendaftar++;
       }
-      printf("Nama:%s Alpro: %d Kalkulus: %d\n", head->nama,head->alpro,head->kalkulus);
    }
-
 }
 
 int main() {
