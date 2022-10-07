@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define CLEAR system("cls")
 // Node
 typedef struct node {
    char nama[20];
@@ -44,7 +45,7 @@ void enqueue(mhs** head,char n[], int alp, int kal) {
    } else if ((*head)->alpro == alp) { 
       mhs *start = (*head);
 
-      while ((start != NULL) && (start->next->kalkulus < kal)) {
+      while ((start->next != NULL) && (start->next->kalkulus < kal)) {
          start = start->next;
       }
       temp->next = start->next;
@@ -52,12 +53,12 @@ void enqueue(mhs** head,char n[], int alp, int kal) {
    } else {
 
       mhs *start=(*head);
-      while ((start != NULL) && (start->next->alpro < alp)) {
+      while ((start->next != NULL) && (start->next->alpro < alp)) {
          start = start->next;
       }
-      
+
       if (start->next->alpro == alp){
-         while ((start != NULL) && (start->next->kalkulus <kal)) {
+         while ((start->next != NULL) && (start->next->kalkulus <kal)) {
             start = start->next;
          }
       }
@@ -84,16 +85,36 @@ void display(mhs* head) {
    }
 }
 
+
 int main() {
    mhs* wakil;
+   wakil = NULL;
 
-   enqueue(&wakil, "Eko", 50,20);
-   enqueue(&wakil, "Budi", 50,20);
-   enqueue(&wakil, "bambang", 60,20);
-   enqueue(&wakil, "Eka", 60,20);
-   enqueue(&wakil, "wawo", 60,20);
-   enqueue(&wakil, "Ame", 60,30);
+   int jumlahPendaftar;
+   char nama[20];
+   int alpro, kalkulus;
 
+   printf("Masukkan jumlah pendaftar : "); scanf("%d", &jumlahPendaftar);
+
+   for (int i = 0; i < jumlahPendaftar; i++) {
+      printf("[ PENDAFTAR KE-%d ]\n", i+1);
+
+      printf("Nama\t\t: "); scanf("%s", nama);
+      printf("Nilai Alpro\t: "); scanf("%d", &alpro);
+      printf("Nilai Kalkulus\t: "); scanf("%d", &kalkulus);
+      
+      enqueue(&wakil, nama, alpro, kalkulus);
+   }
+
+   
+   // enqueue(&wakil, "Eko", 50,20);
+   // enqueue(&wakil, "Budi", 50,20);
+   // enqueue(&wakil, "bambang", 60,20);
+   // enqueue(&wakil, "Eka", 60,20);
+   // enqueue(&wakil, "wawo", 60,20);
+   // enqueue(&wakil, "Ame", 60,30);
+
+   CLEAR;
    display(wakil);
 
    return 0;

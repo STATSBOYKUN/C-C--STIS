@@ -103,7 +103,6 @@ int main() {
    enqueue(&wakil, "wawo", 60,20);
    enqueue(&wakil, "Ame", 60,30);
 
-   // reverse(&wakil);
    display(wakil);
 
    return 0;
