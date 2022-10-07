@@ -7,65 +7,55 @@ typedef struct node {
    char nama[20];
    int alpro;
    int kalkulus;
-   struct node* next;
 } mhs;
 
-int count=0;
-
-// Function to Create A New Node
-mhs* newmhs(char a[], int alp, int kal) {
-   mhs* temp = (mhs*)malloc(sizeof(mhs));
-   strcpy(temp->nama, a);
-   temp->alpro = alp;
-   temp->kalkulus = kal;
-   temp->next = NULL;
-   return temp;
-}
+int front, rear;
 
 // menghapus pendaftar
-void dequeue(mhs** head) {
-   if ((*head)!=NULL){
-      mhs* temp = *head;
-      (*head) = (*head)->next;
-      free(temp);
-      count--;
+void dequeue(mhs* head) {
+   if (rear == -1){
+      printf("Data mahasiswa masih kosong.");
+      return;
+   }
+
+   if (front == rear){
+      front = rear = -1;
+   } else {
+      for (int i=0; i<rear; i++){
+         head[i] = head[i+1];
+      }
+      rear--;
+      front = 0;
    }
 }
 
 // Function to push according to priority
 void enqueue(mhs** head,char n[], int alp, int kal) {
-   mhs* temp = newmhs(n,alp,kal);
-
-   if ((*head) == NULL) {  
-      (*head) = temp;
-   }else if ((*head)->alpro > alp) {
-      temp->next = *head;
-      (*head) = temp;
-   } else if ((*head)->alpro == alp) { 
-      mhs *start = (*head);
-
-      while ((start != NULL) && (start->next->kalkulus < kal)) {
-         start = start->next;
+   
+   if (front == -1){
+      front = 0;
+   }else if ((*head).alpro > alp) {
+      head[rear+1] = head[rear];
+   } else if ((*head).alpro == alp) { 
+      int i = rear;
+      while (head[rear].kalkulus < kal) {
+         i--;
       }
-      temp->next = start->next;
-      start->next = temp;
+      head[i+1] = head[i];
    } else {
-
-      mhs *start=(*head);
-      while ((start != NULL) && (start->next->alpro < alp)) {
-         start = start->next;
+      int i = rear;
+      while (head[rear].alpro < alp) {
+         i--;
       }
-      
-      if (start->next->alpro == alp){
-         while ((start != NULL) && (start->next->kalkulus <kal)) {
-            start = start->next;
+      if (head[i].alpro == alp){
+         while (head[rear].kalkulus < kal) {
+            i--;
          }
       }
+      head[i+1] = head[i];
 
-      temp->next = start->next;
-      start->next = temp;
    }
-
+   
    count++;
    if (count == 6){
       dequeue(head);
@@ -81,11 +71,11 @@ void display(mhs* head) {
       mhs* temp = head;
       for (int i = count-1; i >= 0; i--){
          for (int j = 0; j < i; j++){
-            temp = temp->next;
+            temp = temp.next;
          }
 
          printf("[ PENDAFTAR KE-%d ]\n", noPendaftar);
-         printf("Nama\t\t:%s \nAlpro\t\t: %d \nKalkulus\t: %d\n", temp->nama,temp->alpro,temp->kalkulus);
+         printf("Nama\t\t:%s \nAlpro\t\t: %d \nKalkulus\t: %d\n", temp.nama,temp.alpro,temp.kalkulus);
          
          noPendaftar++;
          temp = head;
@@ -94,14 +84,15 @@ void display(mhs* head) {
 }
 
 int main() {
-   mhs* wakil;
+   front = rear = -1;
+   mhs wakil[5];
 
-   enqueue(&wakil, "Eko", 50,20);
-   enqueue(&wakil, "Budi", 50,20);
-   enqueue(&wakil, "bambang", 60,20);
-   enqueue(&wakil, "Eka", 60,20);
-   enqueue(&wakil, "wawo", 60,20);
-   enqueue(&wakil, "Ame", 60,30);
+   enqueue(&wakil, "Eko", 50, 20);
+   enqueue(&wakil, "Budi", 50, 20);
+   enqueue(&wakil, "bambang", 60, 20);
+   enqueue(&wakil, "Eka", 60, 20);
+   enqueue(&wakil, "wawo", 60, 20);
+   enqueue(&wakil, "Ame", 60, 30);
 
    // reverse(&wakil);
    display(wakil);
