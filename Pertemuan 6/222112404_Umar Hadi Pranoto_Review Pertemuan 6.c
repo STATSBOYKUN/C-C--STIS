@@ -27,7 +27,7 @@ int main() {
 
    while (ulang == 1) {
       CLEAR;
-      printf("[PROGRAM KONVERSI DESIMAL KE BINER]\n");
+      printf("[PROGRAM KONVERSI DESIMAL]\n");
       printf("==================================\n");
       printf(" 1. Desimal ke Biner\n");
       printf(" 2. Desimal ke Oktal\n");

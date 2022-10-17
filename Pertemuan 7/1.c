@@ -45,21 +45,29 @@ void enqueue(mhs** head,char n[], int alp, int kal) {
    } else if ((*head)->alpro == alp) { 
       mhs *start = (*head);
 
-      while ((start->next != NULL) && (start->next->kalkulus < kal)) {
-         start = start->next;
+      if (start->kalkulus >= kal) {
+         temp->next = *head;
+         (*head) = temp;
+      } else {
+         while (start->next != NULL && start->next->kalkulus < kal) {
+            start = start->next;
+         }
+         temp->next = start->next;
+         start->next = temp;
       }
-      temp->next = start->next;
-      start->next = temp;
+      
    } else {
 
       mhs *start=(*head);
       while ((start->next != NULL) && (start->next->alpro < alp)) {
          start = start->next;
       }
-
-      if (start->next->alpro == alp){
-         while ((start->next != NULL) && (start->next->kalkulus <kal)) {
-            start = start->next;
+      
+      if (start->next != NULL) {
+         if (start->next->alpro == alp){
+            while ((start->next != NULL) && (start->next->kalkulus <kal)) {
+               start = start->next;
+            }
          }
       }
 
@@ -71,7 +79,7 @@ void enqueue(mhs** head,char n[], int alp, int kal) {
 }
 
 void display(mhs* head) {
-   int noPendaftar = 1;
+   int noPendaftar = count;
    if(head == NULL) {
       printf("Belum ada yang daftar\n");
    }else{
@@ -80,11 +88,10 @@ void display(mhs* head) {
          printf("Nama\t\t:%s \nAlpro\t\t: %d \nKalkulus\t: %d\n", head->nama,head->alpro,head->kalkulus);
          head = head->next;
          count--;
-         noPendaftar++;
+         noPendaftar--;
       }
    }
 }
-
 
 int main() {
    mhs* wakil;
@@ -106,7 +113,6 @@ int main() {
       enqueue(&wakil, nama, alpro, kalkulus);
    }
 
-   
    // enqueue(&wakil, "Eko", 50,20);
    // enqueue(&wakil, "Budi", 50,20);
    // enqueue(&wakil, "bambang", 60,20);
