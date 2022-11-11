@@ -14,13 +14,17 @@ struct node
 };
 
 int M[100][100];
-struct node *newNode(int newData);
-struct node *insert(struct node *root, int newData);
-void search_node(struct node *root, int data);
-struct node *delete_node(struct node *root, int deletedData);
+int globalCol;
+int globalRow;
 int max(int num1, int num2);
 int height(struct node *root);
 int getcol(int h);
+
+struct node *newNode(int newData);
+struct node *insert(struct node *root, int newData);
+struct node *delete_node(struct node *root, int deletedData);
+
+void search_node(struct node *root, int data);
 void printTree(int M[100][100], struct node *root, int col, int row, int height);
 void TreePrinter(struct node *root);
 void displayPreorder(struct node *node);
@@ -53,11 +57,11 @@ int main()
       switch (opsi)
       {
       case 1:
-         printf("Masukkan jumlah mahasiswa: ");
+         printf("Masukkan jumlah data: ");
          scanf("%d", &n);
          for (i = 0; i < n; i++)
          {
-            printf("Masukkan nama mahasiswa ke-%d: ", i + 1);
+            printf("Masukkan data ke-%d: ", i + 1);
             scanf("%d", &temp);
             root = insert(root, temp);
          }
@@ -223,7 +227,7 @@ struct node *delete_node(struct node *root, int deletedData)
       }
    }
 
-   return root;
+   return cursor;
 }
 
 int max(int num1, int num2)
@@ -254,9 +258,10 @@ void printTree(int M[100][100], struct node *root, int col, int row, int height)
       return;
    }
    
-   M[row][col+1] = root->data;
-   printf("Row: %d, Column: %d, Data: %d", row, col, root->data);
-   printf("\n");
+   M[row*2][col+1] = root->data;
+   globalCol = col+1;
+   globalRow = row*2;
+
    printTree(M, root->left, col-pow(2, height-2), row+1, height-1);
    printTree(M, root->right, col+pow(2, height-2), row+1, height-1);
 }
@@ -265,22 +270,51 @@ void TreePrinter(struct node *root){
    int i = 0, j = 0;
    int h = height(root);
    int col = getcol(h);
-   
-   for (i = 0; i < h+1; i++)
+
+   printTree(M, root, floor(col/2), 0, h);
+
+   for (i = 0; i <= globalRow; i++)
    {
-      for (j = 0; j < 100+1; j++)
+      for (j = 0; j <= globalCol; j++)
       {
          M[i][j] = 0;
       }
    }
-
    printTree(M, root, floor(col/2), 0, h);
+
+   // int rootColumn = 0;
+   // for (i = 0; i <= globalRow; i++)
+   // {
+   //    for (j = 0; j <= globalCol; j++)
+   //    {
+   //       roo
+   //       if (i > 1){
+   //          if ((M[i][j] != 0) && (possibleTwoNodes == 0)){
+   //             // M[i-1][j+2] = 2;
+   //             M[i-1][j+2] = 100001;
+   //             // M[i+1][j+2] = 2;
+   //             possibleTwoNodes = 1;
+   //          } else if ((M[i][j] != 0) && (possibleTwoNodes == 1)){
+   //             // M[i-1][j-2] = 3;
+   //             M[i-1][j+2] = 111110;
+   //             // M[i+1][j-2] = 3;
+   //          }
+   //       }
+   //    }
+   //    possibleTwoNodes = 0;
+   // }
    
-   for (i = 0; i < h; i++)
+   for (i = 0; i <= globalRow; i++)
    {
-      for (j = 0; j < 100; j++){
+      for (j = 0; j <= globalCol; j++){
          if (M[i][j] == 0){
             printf(" ");
+         }
+         else if (M[i][j] == 100001){
+            printf("/");
+         }
+         else if (M[i][j] == 111110){
+            printf("\\");
          }
          else
          {
@@ -288,7 +322,7 @@ void TreePrinter(struct node *root){
          }
       }
       
-      printf("\n\n");
+      printf("\n");
    }
 }
 

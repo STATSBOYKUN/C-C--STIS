@@ -51,21 +51,28 @@ struct node *insert(struct node *root, char newData[30]) {
 void search_node(struct node *root, char data[30]) {
    struct node *cursor = root;
 
-   while (cursor->nama_mhs != data) {
-      if (cursor != NULL) {
-         if (data > cursor->nama_mhs) {
-            cursor = cursor->right;
-         } else {
-            cursor = cursor->left;
-         }
+   if (cursor == NULL){
+      printf("Node %s tidak ditemukan", data);
+      return;
+   }
+   else {
+      while (strcmp(cursor->nama_mhs, data) != 0) {
+         if (cursor != NULL) {
+            if (data > cursor->nama_mhs) {
+               cursor = cursor->right;
+            } else {
+               cursor = cursor->left;
+            }
 
-         if (cursor == NULL) {
-            printf("\nNode %s tidak ditemukan", data);
-            return;
+            if (cursor == NULL) {
+               printf("\nNode %s tidak ditemukan", data);
+               return;
+            }
          }
       }
    }
 
+   root = cursor;
    printf("\nNode %s ditemukan", data);
    return;
 }
@@ -74,13 +81,12 @@ struct node *delete_node(struct node *root, char deletedData[30]) {
    if (root == NULL)
       return NULL;
 
-   struct node *cursor;
-   if (deletedData > root->nama_mhs)
+   struct node *cursor = root;
+   if (strcmp(deletedData, root->nama_mhs) > 0)
       root->right = delete_node(root -> right, deletedData);
-   else if (deletedData < root->nama_mhs)
+   else if (strcmp(deletedData, root->nama_mhs) < 0)
       root->left = delete_node(root->left, deletedData);
    else {
-      // 1 CHILD
 
       if (root->left == NULL) {
          cursor = root->right;
@@ -91,7 +97,6 @@ struct node *delete_node(struct node *root, char deletedData[30]) {
          free(root);
          root = cursor;
       } else {
-         // 2 CHILDS NODE
          cursor = root->right;
          while (cursor->left != NULL){
             cursor = cursor->left;
@@ -102,7 +107,7 @@ struct node *delete_node(struct node *root, char deletedData[30]) {
       }
    }
 
-   return root;
+   return cursor;
 }
 
 void displayPreorder(struct node *node) {
