@@ -142,27 +142,33 @@ void display()
 
 int main()
 {
-   int choice, key, value;
+   int i, choice, key, value;
    while (choice != 6)
    {
-      printf("\n Hash Table Operations \n");
+      printf("\n       [HASH TABLE OPERATIONS]");
+      printf("\n =====================================");
       printf("\n 1. Insert item in the Hash Table");
       printf("\n 2. Remove item from the Hash Table");
       printf("\n 3. Search item from the Hash Table");
       printf("\n 4. Display all elements of Hash Table");
       printf("\n 5. Size of Hash Table");
       printf("\n 6. Exit");
+      printf("\n =====================================");
       printf("\n Enter your choice: ");
       scanf("%d", &choice);
 
       switch (choice)
       {
          case 1:
-            printf("\n Enter key -:\t");
-            scanf("%d", &key);
-            printf("\n Enter value -:\t");
-            scanf("%d", &value);
-            insert(key, value);
+            printf("Jumlah data yang akan diinput : "); scanf("%d", &max);
+            for (i = 0; i < max; i++) {
+               printf("\n Enter key -:\t");
+               scanf("%d", &key);
+               printf("\n Enter value -:\t");
+               scanf("%d", &value);
+
+               insert(key, value);
+            }
             break;
          case 2:
             printf("\n Enter key -:\t");
@@ -187,8 +193,9 @@ int main()
             printf("\n Wrong choice, Please enter correct choice  ");
             break;
       }
+
+      getchar();
    }
    
-   getchar();
    return 0;
 }
