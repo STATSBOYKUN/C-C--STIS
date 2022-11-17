@@ -29,10 +29,10 @@ struct node *insert(struct node *root, char newData[30]) {
       struct node *prev = NULL;
       while (cursor != NULL) {
          prev = cursor;
-         if (newData < cursor->nama_mhs) {
+         if (strcmp(newData, cursor->nama_mhs) < 0) {
             is_left = 1;
             cursor = cursor->left;
-         } else if (newData > cursor->nama_mhs) {
+         } else if (strcmp(newData, cursor->nama_mhs) > 0) {
             is_left = 0;
             cursor = cursor->right;
          }
@@ -58,7 +58,7 @@ void search_node(struct node *root, char data[30]) {
    else {
       while (strcmp(cursor->nama_mhs, data) != 0) {
          if (cursor != NULL) {
-            if (data > cursor->nama_mhs) {
+            if (strcmp(newData, cursor->nama_mhs) > 0) {
                cursor = cursor->right;
             } else {
                cursor = cursor->left;
@@ -107,7 +107,7 @@ struct node *delete_node(struct node *root, char deletedData[30]) {
       }
    }
 
-   return cursor;
+   return root;
 }
 
 void displayPreorder(struct node *node) {

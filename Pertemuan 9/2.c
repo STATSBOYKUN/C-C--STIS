@@ -3,7 +3,6 @@
 #include <string.h>
 #include <conio.h>
 #include <math.h>
-#include <ctype.h>
 
 #define CLEAR system("cls")
 struct node
@@ -26,6 +25,7 @@ struct node *insert(struct node *root, char nama_mhs[30]);
 struct node *delete_node(struct node *root, char nama_mhs[30]);
 
 void printGivenLevel(struct node *root, int level);
+void printLevelOneLine(struct node *root);
 void printLevelOrder(struct node *root);
 void displayPreorder(struct node *node);
 void displayInorder(struct node *node);
@@ -57,7 +57,6 @@ int main()
             printf("Jumlah data yang akan dimasukkan : "); scanf("%d", &n);
             for (int i = 0; i < n; i++) {
                printf("Masukkan data ke-%d : ", i+1); scanf("%s", data);
-               tolower(data);
                root = insert(root, data);
             }
 
@@ -81,17 +80,29 @@ int main()
          case 3:
             printLevelOrder(root);
             printf("\n");
+            printf("Display per Level One Line : ");
+            printLevelOneLine(root);
+
+            printf("\n");
             printf("Display Preorder: ");
             displayPreorder(root);
             break;
          case 4:
             printLevelOrder(root);
             printf("\n");
+            printf("Display per Level One Line : ");
+            printLevelOneLine(root);
+
+            printf("\n");
             printf("Display Inorder: ");
             displayInorder(root);
             break;
          case 5:
             printLevelOrder(root);
+            printf("\n");
+            printf("Display per Level One Line : ");
+            printLevelOneLine(root);
+
             printf("\n");
             printf("Display Postorder: ");
             displayPostorder(root);
@@ -315,6 +326,16 @@ void printLevelOrder(struct node *root)
       printf("Level-%d: ", i-1);
       printGivenLevel(root, i);
       printf("\n");
+   }
+}
+
+void printLevelOneLine(struct node *root)
+{
+   int h = height(root);
+   int i;
+   for (i = 1; i <= h; i++)
+   {
+      printGivenLevel(root, i);
    }
 }
 

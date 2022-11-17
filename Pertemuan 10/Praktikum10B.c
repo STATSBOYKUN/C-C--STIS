@@ -19,7 +19,7 @@ struct hashtable_item
 };
 
 struct hashtable_item *array;
-int max = 10;
+int max;
 int size = 0;
 
 void init_array()
@@ -161,6 +161,7 @@ int main()
       {
          case 1:
             printf("Jumlah data yang akan diinput : "); scanf("%d", &max);
+            init_array();
             for (i = 0; i < max; i++) {
                printf("\n Enter key -:\t");
                scanf("%d", &key);
