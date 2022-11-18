@@ -102,16 +102,32 @@ int main()
 void init_array()
 {
    int i;
-   array = (struct hashtable_item*) malloc(max * sizeof(struct hashtable_item));
    if (array == NULL){
-      printf("Error! memory not allocated.");
-      exit(0);
+      array = (struct hashtable_item*) malloc(max * sizeof(struct hashtable_item));
+      if (array == NULL){
+         printf("Error! memory not allocated.");
+         exit(0);
+      }
+      for (i = 0; i < max; i++){
+         array[i].flag = 0;
+         array[i].data = NULL;
+      }
    }
-   for (i = 0; i < max; i++){
-      array[i].flag = 0;
-      array[i].data = NULL;
+   else
+   {
+      array = (struct hashtable_item*) realloc(array, max * sizeof(struct hashtable_item));
+      if (array == NULL){
+         printf("Error! memory not allocated.");
+         exit(0);
+      }
+      for (i = 0; i < max; i++){
+         if ((array[i].flag != 1) || (array[i].flag != 2))
+         {
+         array[i].flag = 0;
+         array[i].data = NULL;
+         }
+      }
    }
-
 }
 
 int hashcode(int key)
@@ -134,18 +150,23 @@ void insert(int key, int value)
 
    while (array[i].flag == 1)
    {  
-      if (array[i].data->key == key)
-      {
-         printf("\n Key already exists, hence updating its value \n");
-         array[i].data->value = value;
-         return;
-      }
+      if (array[i].flag == 2) {
+         printf("Key %d sudah ada sebelumnya, namun sudah dihapus", key);
+         continue;
+      } else {
+         if (array[i].data->key == key)
+         {
+            printf("\n Key already exists, hence updating its value \n");
+            array[i].data->value = value;
+            return;
+         }
 
-      i = (i + 1) % max;
-      if (i == index)
-      {
-         printf("\n Hash table is full, cannot insert any more item \n");
-         return;
+         i = (i + 1) % max;
+         if (i == index)
+         {
+            printf("\n Hash table is full, cannot insert any more item \n");
+            return;
+         }
       }
    }
 

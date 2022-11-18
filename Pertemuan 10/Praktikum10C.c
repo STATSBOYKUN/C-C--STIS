@@ -35,7 +35,7 @@ void init_array();
 
 int main()
 {
-   int i, choice, key, value;
+   int i, n, choice, key, value;
    while (choice != 6)
    {
       CLEAR;
@@ -59,8 +59,8 @@ int main()
             printf("Jumlah data yang akan diinput : "); scanf("%d", &max);
             break;
          case 1:
-            printf("Jumlah data yang akan diinput : "); scanf("%d", &max);
-            for (i = 0; i < max; i++) {
+            printf("Jumlah data yang akan diinput : "); scanf("%d", &n);
+            for (i = 0; i < n; i++) {
                printf("\n Enter key -:\t");
                scanf("%d", &key);
                printf("\n Enter value -:\t");
@@ -148,7 +148,7 @@ void insert(int key, int value)
    new_item->key = key;
    new_item->value = value;
 
-   while (array[i].flag == 1)
+   while (array[i].flag != 0)
    {  
       if (array[i].flag == 2) {
          printf("Key %d sudah ada sebelumnya, namun sudah dihapus", key);

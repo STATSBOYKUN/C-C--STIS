@@ -58,7 +58,7 @@ void search_node(struct node *root, char data[30]) {
    else {
       while (strcmp(cursor->nama_mhs, data) != 0) {
          if (cursor != NULL) {
-            if (strcmp(newData, cursor->nama_mhs) > 0) {
+            if (strcmp(data, cursor->nama_mhs) > 0) {
                cursor = cursor->right;
             } else {
                cursor = cursor->left;

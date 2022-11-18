@@ -220,7 +220,7 @@ int main()
    root = insert(root, 1);
    root = insert(root, 2);
 
-   root = delete_node(root, 10);
+   // root = delete_node(root, 10);
    displayPreorder(root);
 
    return 0;
