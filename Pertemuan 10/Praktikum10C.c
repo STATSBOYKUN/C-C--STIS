@@ -148,11 +148,11 @@ void insert(int key, int value)
    new_item->key = key;
    new_item->value = value;
 
-   while (array[i].flag != 0)
+   while (array[i].flag != 0 )
    {  
       if (array[i].flag == 2) {
          printf("Key %d sudah ada sebelumnya, namun sudah dihapus", key);
-         continue;
+         i = (i + 1) % max;
       } else {
          if (array[i].data->key == key)
          {
@@ -160,7 +160,7 @@ void insert(int key, int value)
             array[i].data->value = value;
             return;
          }
-
+         
          i = (i + 1) % max;
          if (i == index)
          {
