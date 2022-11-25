@@ -18,6 +18,7 @@ ptrnode insert(int nilai)
     p = (ptrnode)malloc(sizeof(struct node));
     p->value = nilai;
     p->next = NULL;
+
     if (head == NULL)
     {
         head = p;
@@ -82,9 +83,14 @@ void main()
 {
     isi_data();
     int x;
+
     printf("input nilai yang mau dicari: ");
     scanf("%d", &x);
-    if (search(x) == -1) printf("data tidak ditemukan"); 
-    else printf("data ditemukan di node ke-%d",search(x)); 
+
+    if (search(x) == -1) 
+        printf("data tidak ditemukan"); 
+    else 
+        printf("data ditemukan di node ke-%d",search(x)); 
+    
     bersihkan_memori();
 }

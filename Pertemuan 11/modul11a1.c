@@ -25,11 +25,15 @@ int seq_search(int nim[],int size, int x)
 void main()
 {
     int data[MAX];
-    int size; // ukuran array
+    int size;
     int x;
+
     fill_data(data, &size);
     printf("nilai yang mau dicari: ");
     scanf("%d", &x);
-    if (seq_search(data,size, x) == -1) printf("tidak ditemukan"); 
-    else printf("ditemukan pada indeks ke-%d",seq_search(data,size,x)); 
+
+    if (seq_search(data,size, x) == -1) 
+        printf("tidak ditemukan"); 
+    else 
+        printf("ditemukan pada indeks ke-%d",seq_search(data,size,x)); 
 }
