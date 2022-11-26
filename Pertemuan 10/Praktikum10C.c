@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define  CLEAR  system ( "cls" )
+#define CLEAR system("cls")
 
 struct item
 {
@@ -15,7 +15,7 @@ struct hashtable_item
    /*
     * flag = 0 : Tidak ada data
     * flag = 1 : Ada data
-    * flag = 2 : Sebelumnya ada datanya 
+    * flag = 2 : Sebelumnya ada datanya
     * */
    struct item *data;
 };
@@ -54,77 +54,85 @@ int main()
 
       switch (choice)
       {
-         case 0:
-            init_array();
-            printf("Jumlah data yang akan diinput : "); scanf("%d", &max);
-            break;
-         case 1:
-            printf("Jumlah data yang akan diinput : "); scanf("%d", &n);
-            for (i = 0; i < n; i++) {
-               printf("\n Enter key -:\t");
-               scanf("%d", &key);
-               printf("\n Enter value -:\t");
-               scanf("%d", &value);
+      case 0:
+         init_array();
+         printf("Jumlah data yang akan diinput : ");
+         scanf("%d", &max);
+         break;
+      case 1:
+         printf("Jumlah data yang akan diinput : ");
+         scanf("%d", &n);
+         for (i = 0; i < n; i++)
+         {
+            printf("\n Enter key -:\t");
+            scanf("%d", &key);
+            printf("\n Enter value -:\t");
+            scanf("%d", &value);
 
-               insert(key, value);
-            }
-            break;
-         case 2:
-            printf("\n Enter key -:\t");
-            scanf("%d", &key);
-            remove_element(key);
-            break;
-         case 3:
-            printf("\n Enter key -:\t");
-            scanf("%d", &key);
-            search(key);
-            break;
-         case 4:  
-            display();
-            break;
-         case 5:
-            printf("\n Size of Hash Table is -:%d \t", size_of_hashtable());
-            break;
-         case 6:
-            exit(1);
-            break;
-         default:
-            printf("\n Wrong choice, Please enter correct choice  ");
-            break;
+            insert(key, value);
+         }
+         break;
+      case 2:
+         printf("\n Enter key -:\t");
+         scanf("%d", &key);
+         remove_element(key);
+         break;
+      case 3:
+         printf("\n Enter key -:\t");
+         scanf("%d", &key);
+         search(key);
+         break;
+      case 4:
+         display();
+         break;
+      case 5:
+         printf("\n Size of Hash Table is -:%d \t", size_of_hashtable());
+         break;
+      case 6:
+         exit(1);
+         break;
+      default:
+         printf("\n Wrong choice, Please enter correct choice  ");
+         break;
       }
 
       getch();
    }
-   
+
    return 0;
 }
 
 void init_array()
 {
    int i;
-   if (array == NULL){
-      array = (struct hashtable_item*) malloc(max * sizeof(struct hashtable_item));
-      if (array == NULL){
+   if (array == NULL)
+   {
+      array = (struct hashtable_item *)malloc(max * sizeof(struct hashtable_item));
+      if (array == NULL)
+      {
          printf("Error! memory not allocated.");
          exit(0);
       }
-      for (i = 0; i < max; i++){
+      for (i = 0; i < max; i++)
+      {
          array[i].flag = 0;
          array[i].data = NULL;
       }
    }
    else
    {
-      array = (struct hashtable_item*) realloc(array, max * sizeof(struct hashtable_item));
-      if (array == NULL){
+      array = (struct hashtable_item *)realloc(array, max * sizeof(struct hashtable_item));
+      if (array == NULL)
+      {
          printf("Error! memory not allocated.");
          exit(0);
       }
-      for (i = 0; i < max; i++){
+      for (i = 0; i < max; i++)
+      {
          if ((array[i].flag != 1) || (array[i].flag != 2))
          {
-         array[i].flag = 0;
-         array[i].data = NULL;
+            array[i].flag = 0;
+            array[i].data = NULL;
          }
       }
    }
@@ -148,19 +156,22 @@ void insert(int key, int value)
    new_item->key = key;
    new_item->value = value;
 
-   while (array[i].flag != 0 )
-   {  
-      if (array[i].flag == 2) {
+   while (array[i].flag != 0)
+   {
+      if (array[i].flag == 2)
+      {
          printf("Key %d sudah ada sebelumnya, namun sudah dihapus", key);
          i = (i + 1) % max;
-      } else {
+      }
+      else
+      {
          if (array[i].data->key == key)
          {
             printf("\n Key already exists, hence updating its value \n");
             array[i].data->value = value;
             return;
          }
-         
+
          i = (i + 1) % max;
          if (i == index)
          {
