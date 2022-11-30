@@ -39,7 +39,7 @@ void insert(int nim, char nama[40])
 
 void isi_data()
 {
-   int k;
+   int k, temp;
    char n[40];
    printf("Input jumlah data: ");
    scanf("%d", &k);
@@ -49,9 +49,9 @@ void isi_data()
    for (int j = 1; j <= k; j++)
    {
       printf("Data ke-%d\n", j);
-      printf("NIM\t: "); scanf("%d", &k);
+      printf("NIM\t: "); scanf("%d", &temp);
       printf("Nama\t: "); scanf("%s", &n);
-      insert(k, n);
+      insert(temp, n);
    }
 }
 
