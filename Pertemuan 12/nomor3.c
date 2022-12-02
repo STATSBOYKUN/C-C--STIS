@@ -40,7 +40,58 @@ void swapChar(char *a, char *b)
     *b = temp;
 }
 
-//selection sort
+//insertion sort
+void insertionSort(int arr[], int n){
+   int i, key, j, choice, choice2;
+
+   printf("[INSERTION SORT]\n");
+   printf("===============\n");
+   printf("1. Berdasarkan Nama\n");
+   printf("2. Berdasarkan NIM\n");
+   printf("3. Berdasarkan Nilai");
+   printf("===============\n");
+   printf("Pilih: ");
+   scanf("%d", &choice);
+
+   switch(choice){
+      case 1:
+         printf("[CARA PENGURUTAN]\n");
+         printf("===============\n");
+         printf("1. Ascending\n");
+         printf("2. Descending\n");
+         printf("===============\n");
+         printf("Pilih: ");
+         scanf("%d", &choice2);
+
+         switch(choice2){
+            
+         }
+         for (i = 1; i < n; i++){
+            key = arr[i];
+            j = i - 1;
+            while (j >= 0 && arr[j] > key){
+               arr[j + 1] = arr[j];
+               j = j - 1;
+            }
+            arr[j + 1] = key;
+         }
+         break;
+      case 2:
+         for (i = 1; i < n; i++){
+            key = arr[i];
+            j = i - 1;
+            while (j >= 0 && arr[j] < key){
+               arr[j + 1] = arr[j];
+               j = j - 1;
+            }
+            arr[j + 1] = key;
+         }
+         break;
+      default:
+         printf("Pilihan tidak tersedia\n");
+         break;
+   }
+}
 
 
 void main()
