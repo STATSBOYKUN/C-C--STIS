@@ -29,6 +29,7 @@ void insertData(struct data *data, int n){
 void swapInt(int *a, int *b)
 {
     int temp = *a;
+
     *a = *b;
     *b = temp;
 }
@@ -41,8 +42,12 @@ void swapChar(char *a, char *b)
 }
 
 //selection sort
+<<<<<<< Updated upstream
 void selectionSort(struct data *data, int n)
 {
+=======
+void selectionSort(struct data *data, int n){
+>>>>>>> Stashed changes
    int i, j, min_idx, choice, choice2;
    printf("[SELECTION SORT]\n");
    printf("===============\n");
@@ -52,11 +57,18 @@ void selectionSort(struct data *data, int n)
    printf("===============\n");
    printf("Pilih: ");
    scanf("%d", &choice);
+<<<<<<< Updated upstream
    CLEAR;
 
    switch(choice){
       case 1 :
          printf("  [PENGURUTAN]\n");
+=======
+
+   switch(choice)
+   {
+      case 1:
+         printf("CARA PENGURUTAN\n");
          printf("===============\n");
          printf("1. Ascending\n");
          printf("2. Descending\n");
@@ -64,6 +76,49 @@ void selectionSort(struct data *data, int n)
          printf("Pilih: ");
          scanf("%d", &choice2);
 
+         switch(choice2)
+         {
+            case 1:
+               for (i = 0; i < n - 1; i++)
+               {
+                  min_idx = i;
+                  for (j = i + 1; j < n; j++)
+                  {
+                     if (data[j].nim < data[min_idx].nim)
+                        min_idx = j;
+                  }
+                  swapInt(&data[min_idx].nim, &data[i].nim);
+                  swapChar(&data[min_idx].nama, &data[i].nama);
+                  swapInt(&data[min_idx].nilai, &data[i].nilai);
+               }
+               break;
+            case 2:
+               for (i = 0; i < n - 1; i++)
+               {
+                  min_idx = i;
+                  for (j = i + 1; j < n; j++)
+                  {
+                     if (data[j].nim > data[min_idx].nim)
+                        min_idx = j;
+                  }
+                  swapInt(&data[min_idx].nim, &data[i].nim);
+                  swapChar(&data[min_idx].nama, &data[i].nama);
+                  swapInt(&data[min_idx].nilai, &data[i].nilai);
+               }
+               break;
+         }
+         break;
+      case 2:
+         printf("CARA PENGURUTAN\n");
+>>>>>>> Stashed changes
+         printf("===============\n");
+         printf("1. Ascending\n");
+         printf("2. Descending\n");
+         printf("===============\n");
+         printf("Pilih: ");
+         scanf("%d", &choice2);
+
+<<<<<<< Updated upstream
          switch(choice2){
             case 1 :
                for (i = 0; i < n - 1; i++)
@@ -105,6 +160,11 @@ void selectionSort(struct data *data, int n)
 
          switch(choice2){
             case 1 :
+=======
+         switch(choice2)
+         {
+            case 1:
+>>>>>>> Stashed changes
                for (i = 0; i < n - 1; i++)
                {
                   min_idx = i;
@@ -113,10 +173,19 @@ void selectionSort(struct data *data, int n)
                      if (strcmp(data[j].nama, data[min_idx].nama) < 0)
                         min_idx = j;
                   }
+<<<<<<< Updated upstream
                   swapChar(&data[min_idx].nama, &data[i].nama);
                }
                break;
             case 2 :
+=======
+                  swapInt(&data[min_idx].nim, &data[i].nim);
+                  swapChar(&data[min_idx].nama, &data[i].nama);
+                  swapInt(&data[min_idx].nilai, &data[i].nilai);
+               }
+               break;
+            case 2:
+>>>>>>> Stashed changes
                for (i = 0; i < n - 1; i++)
                {
                   min_idx = i;
@@ -125,6 +194,7 @@ void selectionSort(struct data *data, int n)
                      if (strcmp(data[j].nama, data[min_idx].nama) > 0)
                         min_idx = j;
                   }
+<<<<<<< Updated upstream
                   swapChar(&data[min_idx].nama, &data[i].nama);
                }
                break;
@@ -135,6 +205,17 @@ void selectionSort(struct data *data, int n)
          break;
       case 3 :
          printf("  [PENGURUTAN]\n");
+=======
+                  swapInt(&data[min_idx].nim, &data[i].nim);
+                  swapChar(&data[min_idx].nama, &data[i].nama);
+                  swapInt(&data[min_idx].nilai, &data[i].nilai);
+               }
+               break;
+         }
+         break;
+      case 3:
+         printf("CARA PENGURUTAN\n");
+>>>>>>> Stashed changes
          printf("===============\n");
          printf("1. Ascending\n");
          printf("2. Descending\n");
@@ -142,8 +223,14 @@ void selectionSort(struct data *data, int n)
          printf("Pilih: ");
          scanf("%d", &choice2);
 
+<<<<<<< Updated upstream
          switch(choice2){
             case 1 :
+=======
+         switch(choice2)
+         {
+            case 1:
+>>>>>>> Stashed changes
                for (i = 0; i < n - 1; i++)
                {
                   min_idx = i;
@@ -152,10 +239,19 @@ void selectionSort(struct data *data, int n)
                      if (data[j].nilai < data[min_idx].nilai)
                         min_idx = j;
                   }
+<<<<<<< Updated upstream
                   swapInt(&data[min_idx].nilai, &data[i].nilai);
                }
                break;
             case 2 :
+=======
+                  swapInt(&data[min_idx].nim, &data[i].nim);
+                  swapChar(&data[min_idx].nama, &data[i].nama);
+                  swapInt(&data[min_idx].nilai, &data[i].nilai);
+               }
+               break;
+            case 2:
+>>>>>>> Stashed changes
                for (i = 0; i < n - 1; i++)
                {
                   min_idx = i;
@@ -164,6 +260,7 @@ void selectionSort(struct data *data, int n)
                      if (data[j].nilai > data[min_idx].nilai)
                         min_idx = j;
                   }
+<<<<<<< Updated upstream
                   swapInt(&data[min_idx].nilai, &data[i].nilai);
                }
                break;
@@ -186,6 +283,16 @@ void display(struct data *data, int n){
       printf("NIM\t: %d\n", data[i].nim);
       printf("Nama\t: %s\n", data[i].nama);
       printf("Nilai\t: %d\n", data[i].nilai);
+=======
+                  swapInt(&data[min_idx].nim, &data[i].nim);
+                  swapChar(&data[min_idx].nama, &data[i].nama);
+                  swapInt(&data[min_idx].nilai, &data[i].nilai);
+               }
+               break;
+         }
+         break;
+
+>>>>>>> Stashed changes
    }
 }
 
