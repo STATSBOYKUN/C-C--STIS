@@ -1,53 +1,43 @@
-//program sorting in c
+// program sorting in c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #define CLEAR system("cls")
 
-struct data{
+struct data
+{
    int nim;
    char nama[50];
    int nilai;
 };
 
-void insertData(struct data *data, int n){
+void insertData(struct data *data, int n)
+{
    int i;
    for (i = 0; i < n; i++)
    {
-      printf("[Data ke-%d]", i+1);
-      printf("NIM: ");
+      printf("[Data ke-%d]\n", i + 1);
+      printf("NIM\t: ");
       scanf("%d", &data[i].nim);
-      printf("Nama: ");
+      printf("Nama\t: ");
       scanf("%s", &data[i].nama);
-      printf("Nilai: ");
+      printf("Nilai\t: ");
       scanf("%d", &data[i].nilai);
    }
 }
 
-//swap
-void swapInt(int *a, int *b)
+// swap
+void swapStruct(struct data *a, struct data *b)
 {
-    int temp = *a;
-
-    *a = *b;
-    *b = temp;
+   struct data temp = *a;
+   *a = *b;
+   *b = temp;
 }
 
-void swapChar(char *a, char *b)
-{
-    char temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-//selection sort
-<<<<<<< Updated upstream
+// selection sort
 void selectionSort(struct data *data, int n)
 {
-=======
-void selectionSort(struct data *data, int n){
->>>>>>> Stashed changes
    int i, j, min_idx, choice, choice2;
    printf("[SELECTION SORT]\n");
    printf("===============\n");
@@ -57,242 +47,137 @@ void selectionSort(struct data *data, int n){
    printf("===============\n");
    printf("Pilih: ");
    scanf("%d", &choice);
-<<<<<<< Updated upstream
+
    CLEAR;
-
-   switch(choice){
-      case 1 :
-         printf("  [PENGURUTAN]\n");
-=======
-
-   switch(choice)
+   switch (choice)
    {
-      case 1:
-         printf("CARA PENGURUTAN\n");
-         printf("===============\n");
-         printf("1. Ascending\n");
-         printf("2. Descending\n");
-         printf("===============\n");
-         printf("Pilih: ");
-         scanf("%d", &choice2);
+   case 1:
+      printf("CARA PENGURUTAN\n");
+      printf("===============\n");
+      printf("1. Ascending\n");
+      printf("2. Descending\n");
+      printf("===============\n");
+      printf("Pilih: ");
+      scanf("%d", &choice2);
 
-         switch(choice2)
+      switch (choice2)
+      {
+      case 1:
+         for (i = 0; i < n - 1; i++)
          {
-            case 1:
-               for (i = 0; i < n - 1; i++)
-               {
-                  min_idx = i;
-                  for (j = i + 1; j < n; j++)
-                  {
-                     if (data[j].nim < data[min_idx].nim)
-                        min_idx = j;
-                  }
-                  swapInt(&data[min_idx].nim, &data[i].nim);
-                  swapChar(&data[min_idx].nama, &data[i].nama);
-                  swapInt(&data[min_idx].nilai, &data[i].nilai);
-               }
-               break;
-            case 2:
-               for (i = 0; i < n - 1; i++)
-               {
-                  min_idx = i;
-                  for (j = i + 1; j < n; j++)
-                  {
-                     if (data[j].nim > data[min_idx].nim)
-                        min_idx = j;
-                  }
-                  swapInt(&data[min_idx].nim, &data[i].nim);
-                  swapChar(&data[min_idx].nama, &data[i].nama);
-                  swapInt(&data[min_idx].nilai, &data[i].nilai);
-               }
-               break;
+            min_idx = i;
+            for (j = i + 1; j < n; j++)
+            {
+               if (data[j].nim < data[min_idx].nim)
+                  min_idx = j;
+            }
+            swapStruct(&data[min_idx], &data[i]);
          }
          break;
       case 2:
-         printf("CARA PENGURUTAN\n");
->>>>>>> Stashed changes
-         printf("===============\n");
-         printf("1. Ascending\n");
-         printf("2. Descending\n");
-         printf("===============\n");
-         printf("Pilih: ");
-         scanf("%d", &choice2);
-
-<<<<<<< Updated upstream
-         switch(choice2){
-            case 1 :
-               for (i = 0; i < n - 1; i++)
-               {
-                  min_idx = i;
-                  for (j = i + 1; j < n; j++)
-                  {
-                     if (data[j].nim < data[min_idx].nim)
-                        min_idx = j;
-                  }
-                  swapInt(&data[min_idx].nim, &data[i].nim);
-               }
-               break;
-            case 2 :
-               for (i = 0; i < n - 1; i++)
-               {
-                  min_idx = i;
-                  for (j = i + 1; j < n; j++)
-                  {
-                     if (data[j].nim > data[min_idx].nim)
-                        min_idx = j;
-                  }
-                  swapInt(&data[min_idx].nim, &data[i].nim);
-               }
-               break;
-            default :
-               printf("Pilihan tidak tersedia!\n");
-               break;
-         }
-         break;
-      case 2 :
-         printf("  [PENGURUTAN]\n");
-         printf("===============\n");
-         printf("1. Ascending\n");
-         printf("2. Descending\n");
-         printf("===============\n");
-         printf("Pilih: ");
-         scanf("%d", &choice2);
-
-         switch(choice2){
-            case 1 :
-=======
-         switch(choice2)
+         for (i = 0; i < n - 1; i++)
          {
-            case 1:
->>>>>>> Stashed changes
-               for (i = 0; i < n - 1; i++)
-               {
-                  min_idx = i;
-                  for (j = i + 1; j < n; j++)
-                  {
-                     if (strcmp(data[j].nama, data[min_idx].nama) < 0)
-                        min_idx = j;
-                  }
-<<<<<<< Updated upstream
-                  swapChar(&data[min_idx].nama, &data[i].nama);
-               }
-               break;
-            case 2 :
-=======
-                  swapInt(&data[min_idx].nim, &data[i].nim);
-                  swapChar(&data[min_idx].nama, &data[i].nama);
-                  swapInt(&data[min_idx].nilai, &data[i].nilai);
-               }
-               break;
-            case 2:
->>>>>>> Stashed changes
-               for (i = 0; i < n - 1; i++)
-               {
-                  min_idx = i;
-                  for (j = i + 1; j < n; j++)
-                  {
-                     if (strcmp(data[j].nama, data[min_idx].nama) > 0)
-                        min_idx = j;
-                  }
-<<<<<<< Updated upstream
-                  swapChar(&data[min_idx].nama, &data[i].nama);
-               }
-               break;
-            default :
-               printf("Pilihan tidak tersedia!\n");
-               break;
+            min_idx = i;
+            for (j = i + 1; j < n; j++)
+            {
+               if (data[j].nim > data[min_idx].nim)
+                  min_idx = j;
+            }
+            swapStruct(&data[min_idx], &data[i]);
          }
          break;
-      case 3 :
-         printf("  [PENGURUTAN]\n");
-=======
-                  swapInt(&data[min_idx].nim, &data[i].nim);
-                  swapChar(&data[min_idx].nama, &data[i].nama);
-                  swapInt(&data[min_idx].nilai, &data[i].nilai);
-               }
-               break;
-         }
-         break;
-      case 3:
-         printf("CARA PENGURUTAN\n");
->>>>>>> Stashed changes
-         printf("===============\n");
-         printf("1. Ascending\n");
-         printf("2. Descending\n");
-         printf("===============\n");
-         printf("Pilih: ");
-         scanf("%d", &choice2);
+      }
+      break;
+   case 2:
+      printf("  [PENGURUTAN]\n");
+      printf("===============\n");
+      printf("1. Ascending\n");
+      printf("2. Descending\n");
+      printf("===============\n");
+      printf("Pilih: ");
+      scanf("%d", &choice2);
 
-<<<<<<< Updated upstream
-         switch(choice2){
-            case 1 :
-=======
-         switch(choice2)
+      switch (choice2)
+      {
+      case 1:
+         for (i = 0; i < n - 1; i++)
          {
-            case 1:
->>>>>>> Stashed changes
-               for (i = 0; i < n - 1; i++)
-               {
-                  min_idx = i;
-                  for (j = i + 1; j < n; j++)
-                  {
-                     if (data[j].nilai < data[min_idx].nilai)
-                        min_idx = j;
-                  }
-<<<<<<< Updated upstream
-                  swapInt(&data[min_idx].nilai, &data[i].nilai);
-               }
-               break;
-            case 2 :
-=======
-                  swapInt(&data[min_idx].nim, &data[i].nim);
-                  swapChar(&data[min_idx].nama, &data[i].nama);
-                  swapInt(&data[min_idx].nilai, &data[i].nilai);
-               }
-               break;
-            case 2:
->>>>>>> Stashed changes
-               for (i = 0; i < n - 1; i++)
-               {
-                  min_idx = i;
-                  for (j = i + 1; j < n; j++)
-                  {
-                     if (data[j].nilai > data[min_idx].nilai)
-                        min_idx = j;
-                  }
-<<<<<<< Updated upstream
-                  swapInt(&data[min_idx].nilai, &data[i].nilai);
-               }
-               break;
-            default :
-               printf("Pilihan tidak tersedia!\n");
-               break;
+            min_idx = i;
+            for (j = i + 1; j < n; j++)
+            {
+               if (strcmp(data[j].nama, data[min_idx].nama) < 0)
+                  min_idx = j;
+            }
+            swapStruct(&data[min_idx], &data[i]);
          }
          break;
-      default :
-         printf("Pilihan tidak tersedia!\n");
+      case 2:
+         for (i = 0; i < n - 1; i++)
+         {
+            min_idx = i;
+            for (j = i + 1; j < n; j++)
+            {
+               if (strcmp(data[j].nama, data[min_idx].nama) > 0)
+                  min_idx = j;
+            }
+            swapStruct(&data[min_idx], &data[i]);
+         }
          break;
+      }
+      break;
+   case 3:
+      printf("CARA PENGURUTAN\n");
+      printf("===============\n");
+      printf("1. Ascending\n");
+      printf("2. Descending\n");
+      printf("===============\n");
+      printf("Pilih: ");
+      scanf("%d", &choice2);
+
+      switch (choice2)
+      {
+      case 1:
+         for (i = 0; i < n - 1; i++)
+         {
+            min_idx = i;
+            for (j = i + 1; j < n; j++)
+            {
+               if (data[j].nilai < data[min_idx].nilai)
+                  min_idx = j;
+            }
+            swapStruct(&data[min_idx], &data[i]);
+         }
+         break;
+      case 2:
+         for (i = 0; i < n - 1; i++)
+         {
+            min_idx = i;
+            for (j = i + 1; j < n; j++)
+            {
+               if (data[j].nilai > data[min_idx].nilai)
+                  min_idx = j;
+            }
+            swapStruct(&data[min_idx], &data[i]);
+         }
+         break;
+      }
+      break;
+   default:
+      printf("Pilihan tidak tersedia!\n");
+      break;
    }
 }
 
-void display(struct data *data, int n){
+void display(struct data data[], int n)
+{
    int i;
    for (i = 0; i < n; i++)
    {
-      printf("[DATA KE-%d]\n", i+1);
+      printf("[MAHASISWA KE-%d]\n", i + 1);
       printf("NIM\t: %d\n", data[i].nim);
       printf("Nama\t: %s\n", data[i].nama);
       printf("Nilai\t: %d\n", data[i].nilai);
-=======
-                  swapInt(&data[min_idx].nim, &data[i].nim);
-                  swapChar(&data[min_idx].nama, &data[i].nama);
-                  swapInt(&data[min_idx].nilai, &data[i].nilai);
-               }
-               break;
-         }
-         break;
-
->>>>>>> Stashed changes
+      printf("\n");
    }
 }
 
@@ -314,31 +199,34 @@ void main()
       printf("Pilih: ");
       scanf("%d", &choice);
 
-      switch(choice)
+      switch (choice)
       {
-         case 1:
-            CLEAR;
-            printf("Masukkan banyak data: "); scanf("%d", &n);
-            insertData(arr, n);
-            break;
-         case 2:
-            CLEAR;
-            selectionSort(arr, n);
-            printf("Data berhasil diurutkan!\n");
-            break;
-         case 3:
-            CLEAR;
-            display(arr, n);
-            break;
-         case 4:
-            CLEAR;
-            exit(0);
-            break;
-         default:
-            printf("Pilihan tidak tersedia!\n");
-            break;
+      case 1:
+         CLEAR;
+         printf("Masukkan banyak data: ");
+         scanf("%d", &n);
+
+         arr = (struct data *)malloc(n * sizeof(struct data));
+         insertData(arr, n);
+         break;
+      case 2:
+         CLEAR;
+         selectionSort(arr, n);
+         printf("Data berhasil diurutkan!\n");
+         break;
+      case 3:
+         CLEAR;
+         display(arr, n);
+         break;
+      case 4:
+         CLEAR;
+         exit(0);
+         break;
+      default:
+         printf("Pilihan tidak tersedia!\n");
+         break;
       }
-   
+
       printf("Press any key to continue...");
       getch();
    }

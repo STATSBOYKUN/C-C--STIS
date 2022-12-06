@@ -1,9 +1,10 @@
+//selection sort
 #include <stdio.h>
-#define MAX 100 // ukuran maksimum array
+#define MAX 100 // ukuran maksimum dataay
 
 void fill_data(int data[], int *size)
 { // mengisi data
-   printf("Input ukuran array (max 100): ");
+   printf("Input ukuran dataay (max 100): ");
    scanf("%d", size);
    printf("Input data: ");
    for (int i = 0; i < *size; i++)
@@ -26,9 +27,9 @@ void swap(int *a, int *b)
    *b = temp;
 }
 
-void selection_sort(int data[], int size)
+void selection_sort(int data[], int n)
 {
-   int, i, j, min_idx, choice;
+   int i, j, min_idx, choice;
    printf("[SELECTION SORT]\n");
    printf("===============\n");
    printf("1. Ascending\n");
@@ -45,10 +46,10 @@ void selection_sort(int data[], int size)
             min_idx = i;
             for (j = i + 1; j < n; j++)
             {
-               if (arr[j] < arr[min_idx])
+               if (data[j] < data[min_idx])
                   min_idx = j;
             }
-            swap(&arr[min_idx], &arr[i]);
+            swap(&data[min_idx], &data[i]);
          }
          break;
       case 2:
@@ -57,10 +58,10 @@ void selection_sort(int data[], int size)
             min_idx = i;
             for (j = i + 1; j < n; j++)
             {
-               if (arr[j] > arr[min_idx])
+               if (data[j] > data[min_idx])
                   min_idx = j;
             }
-            swap(&arr[min_idx], &arr[i]);
+            swap(&data[min_idx], &data[i]);
          }
          break;
       default:
@@ -72,7 +73,7 @@ void selection_sort(int data[], int size)
 void main()
 {
    int data[MAX];
-   int size; // ukuran array yang dipakai
+   int size; // ukuran dataay yang dipakai
    fill_data(data, &size);
    selection_sort(data, size);
    printf("data setelah diurutkan:\n");

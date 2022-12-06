@@ -1,3 +1,4 @@
+// bubble sort
 #include <stdio.h>
 #define MAX 100 // ukuran maksimum array
 
