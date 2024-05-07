@@ -3,7 +3,6 @@
 #include <cctype>
 #include <cstdlib>
 #include <chrono>
-#include <stdlib.h>
 
 using namespace std;
 
